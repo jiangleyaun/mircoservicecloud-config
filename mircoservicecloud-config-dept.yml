@@ -1,0 +1,78 @@
+#集群配置版
+spring:
+  profiles:
+    active: dev
+---
+server:
+  port: 8001
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.leyuan.jiang.entity
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+spring:
+  profiles: dev
+  application:
+    name: mircoservicecloud-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/cloudDB01?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: mircoservicecloud-dept:8001
+    prefer-ip-address: true
+
+info:
+  app.name: springcloud
+  company.name: jiangleyuan
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+---
+server:
+  port: 8001
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.leyuan.jiang.entity
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+spring:
+  profiles: test
+  application:
+    name: mircoservicecloud-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/cloudDB02?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: mircoservicecloud-dept:8001
+    prefer-ip-address: true
+
+info:
+  app.name: springcloud
+  company.name: jiangleyuan
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
